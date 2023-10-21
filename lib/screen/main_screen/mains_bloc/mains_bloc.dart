@@ -6,10 +6,10 @@ part 'mains_state.dart';
 
 class MainsBloc extends Bloc<MainsEvent, MainsState> {
   MainsBloc() : super(const DashboardScreenState(index: 0)) {
-    on<ChangedBottomNavBar>(_onChangedBottomNavBar);
+    on<ChangedBottomNavBarEvent>(_onChangedBottomNavBar);
   }
   void _onChangedBottomNavBar(
-      ChangedBottomNavBar event, Emitter<MainsState> emit) {
+      ChangedBottomNavBarEvent event, Emitter<MainsState> emit) {
     final int index = event.index;
     if (index == 0) {
       emit(DashboardScreenState(index: index));

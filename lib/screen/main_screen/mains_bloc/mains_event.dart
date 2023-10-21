@@ -7,10 +7,10 @@ sealed class MainsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class ChangedBottomNavBar extends MainsEvent {
+final class ChangedBottomNavBarEvent extends MainsEvent {
   final int index;
 
-  const ChangedBottomNavBar({required this.index});
+  const ChangedBottomNavBarEvent({required this.index});
 
   @override
   List<Object> get props => [index];
