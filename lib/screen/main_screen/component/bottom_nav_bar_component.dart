@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_lifes_app/screen/dashboard_screen/dashboard_bloc/dashboard_bloc.dart';
+import 'package:gym_lifes_app/screen/main_screen/mains_bloc/mains_bloc.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
   const BottomNavigationBarComponent({super.key});
@@ -21,14 +21,12 @@ class BottomNavigationBarComponent extends StatelessWidget {
         selectedItemColor: Colors.amber,
         items: items,
         onTap: (int index) {
-          context
-              .read<DashboardBloc>()
-              .add(ChangedBottomNavBarEvent(index: index));
+          context.read<MainsBloc>().add(ChangedBottomNavBarEvent(index: index));
         },
       );
     }
 
-    return BlocBuilder<DashboardBloc, DashboardState>(
+    return BlocBuilder<MainsBloc, MainsState>(
       builder: (context, state) {
         if (state is DashboardScreenState) {
           return bottomNavigationBar(currentIndex: state.index);
