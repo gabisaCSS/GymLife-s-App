@@ -14,4 +14,8 @@ class RecipeIngrCubit extends Cubit<RecipeIngrState> {
       emit(RecipeIngrAmanState(ingrValue: value));
     }
   }
+
+  void clear() {
+    emit(const RecipeIngrAmanState(ingrValue: ''));
+  }
 }

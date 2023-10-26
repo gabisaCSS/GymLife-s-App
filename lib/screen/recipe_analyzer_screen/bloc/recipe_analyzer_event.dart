@@ -17,3 +17,8 @@ final class SubmitRecipeEvent extends RecipeAnalyzerEvent {
   @override
   List<Object> get props => [recipeTitle, recipeIngr];
 }
+
+final class ClearEvent extends RecipeAnalyzerEvent {
+  @override
+  List<Object> get props => [];
+}

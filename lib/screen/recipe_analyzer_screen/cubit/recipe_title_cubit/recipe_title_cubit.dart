@@ -13,4 +13,8 @@ class RecipeTitleCubit extends Cubit<RecipeTitleState> {
       emit(RecipeTitleAmanState(titleValue: value));
     }
   }
+
+  void clear() {
+    emit(const RecipeTitleAmanState(titleValue: ''));
+  }
 }

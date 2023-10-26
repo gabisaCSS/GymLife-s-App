@@ -11,6 +11,7 @@ class RecipeAnalyzerBloc
     extends Bloc<RecipeAnalyzerEvent, RecipeAnalyzerState> {
   RecipeAnalyzerBloc() : super(RecipeAnalyzerInitial()) {
     on<SubmitRecipeEvent>(_onSubmitRecipeEvent);
+    on<ClearEvent>(_onClear);
   }
 
   void _onSubmitRecipeEvent(
@@ -27,5 +28,9 @@ class RecipeAnalyzerBloc
       print(e.response?.statusCode);
       emit(const RecipeAnalyzerErrorState(errorMessage: 'Analyze Failed!'));
     }
+  }
+
+  void _onClear(ClearEvent event, Emitter<RecipeAnalyzerState> emit) {
+    emit(RecipeAnalyzerInitial());
   }
 }
