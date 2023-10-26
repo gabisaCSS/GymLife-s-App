@@ -117,9 +117,9 @@ class Parsed {
 }
 
 class NutrientsData {
-  String? label;
-  double? quantity;
-  String? unit;
+  String label;
+  double quantity;
+  String unit;
 
   NutrientsData({
     required this.label,

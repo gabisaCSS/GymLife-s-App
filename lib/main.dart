@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_lifes_app/screen/food_screen/bloc/recipe_analyzer_bloc.dart';
-import 'package:gym_lifes_app/screen/food_screen/cubit/recipe_ingr_cubit/recipe_ingr_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/cubit/recipe_title_cubit/recipe_title_cubit.dart';
 import 'package:gym_lifes_app/screen/main_screen/main_screen.dart';
 import 'package:gym_lifes_app/screen/main_screen/mains_bloc/mains_bloc.dart';
+import 'package:gym_lifes_app/screen/recipe_analyzer_screen/bloc/recipe_analyzer_bloc.dart';
+import 'package:gym_lifes_app/screen/recipe_analyzer_screen/cubit/recipe_ingr_cubit/recipe_ingr_cubit.dart';
+import 'package:gym_lifes_app/screen/recipe_analyzer_screen/cubit/recipe_title_cubit/recipe_title_cubit.dart';
 
 void main() {
   runApp(const MyApp());
