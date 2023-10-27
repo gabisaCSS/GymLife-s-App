@@ -23,10 +23,13 @@ final class RecipeAnalyzerErrorState extends RecipeAnalyzerState {
 final class RecipeAnalyzerLoadedState extends RecipeAnalyzerState {
   final NutritionModel nutritionModel;
   final String recipeTitle;
+  final DateTime date;
 
   const RecipeAnalyzerLoadedState(
-      {required this.recipeTitle, required this.nutritionModel});
+      {required this.recipeTitle,
+      required this.nutritionModel,
+      required this.date});
 
   @override
-  List<Object> get props => [nutritionModel, recipeTitle];
+  List<Object> get props => [nutritionModel, recipeTitle, date];
 }

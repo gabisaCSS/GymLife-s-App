@@ -23,7 +23,9 @@ class RecipeAnalyzerBloc
       NutritionModel nutritionModel = await NutritionApi.getNutrition(
           title: event.recipeTitle, ingr: ingrList);
       emit(RecipeAnalyzerLoadedState(
-          recipeTitle: event.recipeTitle, nutritionModel: nutritionModel));
+          recipeTitle: event.recipeTitle,
+          nutritionModel: nutritionModel,
+          date: event.date));
     } on DioException catch (e) {
       print(e.response?.statusCode);
       emit(const RecipeAnalyzerErrorState(errorMessage: 'Analyze Failed!'));

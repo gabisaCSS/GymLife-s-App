@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/routes/routes.dart';
 import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/components/show_total_nutrition_component.dart';
+import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
 import 'package:gym_lifes_app/screen/main_screen/main_screen.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<BreakfastCubit>(create: (context) => BreakfastCubit()),
           BlocProvider<LunchCubit>(create: (context) => LunchCubit()),
           BlocProvider<DinnerCubit>(create: (context) => DinnerCubit()),
+          BlocProvider<DateCubit>(create: (context) => DateCubit()),
           BlocProvider<RecipeAnalyzerBloc>(
               create: (context) => RecipeAnalyzerBloc()),
         ],

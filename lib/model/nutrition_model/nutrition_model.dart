@@ -132,6 +132,14 @@ class NutrientsData {
         quantity: json["quantity"]?.toDouble(),
         unit: json["unit"],
       );
+
+  Map<String, dynamic> toMap() {
+    return {
+      "label": label,
+      "quantity": quantity,
+      "unit": unit,
+    };
+  }
 }
 
 class NutrientsKCal {

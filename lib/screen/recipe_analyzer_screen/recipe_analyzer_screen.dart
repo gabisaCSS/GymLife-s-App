@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/model/food_model/food_model.dart';
 import 'package:gym_lifes_app/model/nutrition_model/nutrition_model.dart';
 import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
 import 'package:gym_lifes_app/screen/recipe_analyzer_screen/component/recipe_ingr_field_component.dart';
@@ -60,7 +61,9 @@ class RecipeAnalyzerScreen extends StatelessWidget {
             Builder(builder: (context) {
               final recipeTitleState = context.watch<RecipeTitleCubit>().state;
               final recipeIngrState = context.watch<RecipeIngrCubit>().state;
+              final dateState = context.read<DateCubit>().state;
 
+              DateTime date = dateState.currentDate;
               bool isEnabledTitle = recipeTitleState is RecipeTitleAmanState &&
                   recipeTitleState.titleValue.isNotEmpty;
               bool isEnabledIngr = recipeIngrState is RecipeIngrAmanState &&
@@ -72,7 +75,8 @@ class RecipeAnalyzerScreen extends StatelessWidget {
                           context.read<RecipeAnalyzerBloc>().add(
                               SubmitRecipeEvent(
                                   recipeTitle: recipeTitleState.titleValue,
-                                  recipeIngr: recipeIngrState.ingrValue));
+                                  recipeIngr: recipeIngrState.ingrValue,
+                                  date: date));
                         }
                       : null,
                   child: const Text('Analyze'));
@@ -112,7 +116,9 @@ class RecipeAnalyzerScreen extends StatelessWidget {
                                           protein: nutrisi.protein,
                                           fat: nutrisi.fat,
                                           fiber: nutrisi.fiber,
-                                          sugar: nutrisi.sugar);
+                                          sugar: nutrisi.sugar,
+                                          eatTime: args,
+                                          date: state.date);
 
                                       final String notif =
                                           '${state.recipeTitle} successfully added to your $args';
