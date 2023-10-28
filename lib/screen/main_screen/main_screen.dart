@@ -11,21 +11,26 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Gym Life's App"),
-        centerTitle: true,
-        backgroundColor: Colors.green.shade300,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            title: const Text("Gym Life's App"),
+            centerTitle: true,
+            backgroundColor: Colors.green.shade300,
+          )
+        ],
+        body: BlocBuilder<MainsBloc, MainsState>(builder: (context, state) {
+          if (state is DashboardScreenState) {
+            return const DashboardScreen();
+          } else if (state is FoodScreenState) {
+            return const FoodScreen();
+          } else {
+            return const SizedBox();
+          }
+        }),
       ),
-      body: BlocBuilder<MainsBloc, MainsState>(builder: (context, state) {
-        if (state is DashboardScreenState) {
-          return const DashboardScreen();
-        } else if (state is FoodScreenState) {
-          return const FoodScreen();
-        } else {
-          return const SizedBox();
-        }
-      }),
       bottomNavigationBar: const BottomNavigationBarComponent(),
+      backgroundColor: Colors.grey.shade100,
     );
   }
 }
