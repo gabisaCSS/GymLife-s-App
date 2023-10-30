@@ -1,5 +1,6 @@
 import 'package:gym_lifes_app/model/food_model/food_model.dart';
 import 'package:gym_lifes_app/model/nutrition_model/nutrition_model.dart';
+import 'package:gym_lifes_app/model/weight_model/weight_model.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -31,8 +32,13 @@ class DatabaseHelper {
   static const String _quantityColumn = 'quantity';
   static const String _unitColumn = 'unit';
 
+  static const String _weightTable = 'tb_weight';
+  static const String _weightIdColumn = 'id';
+  static const String _weightColumn = 'weight';
+  static const String _weightDateColumn = 'date';
+
   Future<Database> _initializeDb() async {
-    var db = openDatabase(join(await getDatabasesPath(), 'food_db.db'),
+    var db = openDatabase(join(await getDatabasesPath(), 'gym_db.db'),
         onCreate: (db, version) async {
       await db.execute('''
         CREATE TABLE $_foodTable(
@@ -51,8 +57,46 @@ class DatabaseHelper {
           $_unitColumn TEXT
         )
         ''');
+
+      await db.execute('''
+          CREATE TABLE $_weightTable(
+          $_weightIdColumn INTEGER PRIMARY KEY AUTOINCREMENT,
+          $_weightColumn REAL,
+          $_weightDateColumn INT
+        )
+        ''');
     }, version: 1);
     return db;
+  }
+
+  Future<void> insertWeight(WeightModel weightModel) async {
+    final Database db = await database;
+    await db.insert(_weightTable, weightModel.toMap());
+  }
+
+  Future<List<WeightModel>> getWeight({DateTime? sinceDate}) async {
+    final Database db = await database;
+
+    if (sinceDate == null) {
+      final List<Map<String, dynamic>> result =
+          await db.query(_weightTable, orderBy: _weightDateColumn);
+
+      final List<WeightModel> weightModelList = result.map((e) {
+        // print(e['date']);
+        return WeightModel.fromMap(e);
+      }).toList();
+      return weightModelList;
+    } else {
+      int dateInt = sinceDate.millisecondsSinceEpoch;
+      final List<Map<String, dynamic>> result = await db.query(_weightTable,
+          orderBy: _weightDateColumn,
+          where: "$_weightDateColumn >= ?",
+          whereArgs: [dateInt]);
+
+      final List<WeightModel> weightModelList =
+          result.map((e) => WeightModel.fromMap(e)).toList();
+      return weightModelList;
+    }
   }
 
   Future<void> insertFood(FoodModel foodModel) async {
