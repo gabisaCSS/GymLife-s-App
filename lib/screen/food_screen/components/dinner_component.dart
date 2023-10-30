@@ -3,8 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/routes/routes.dart';
 import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
 
-class DinnerComponent extends StatelessWidget {
+class DinnerComponent extends StatefulWidget {
   const DinnerComponent({super.key});
+
+  @override
+  State<DinnerComponent> createState() => _DinnerComponentState();
+}
+
+class _DinnerComponentState extends State<DinnerComponent> {
+  @override
+  void initState() {
+    context.read<DinnerCubit>().getDinner(date: DateTime.now());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

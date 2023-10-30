@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/routes/routes.dart';
+import 'package:gym_lifes_app/screen/add_weight_screen.dart/add_weight_screen.dart';
+import 'package:gym_lifes_app/screen/add_weight_screen.dart/weight_date_cubit/weight_date_cubit.dart';
+import 'package:gym_lifes_app/screen/add_weight_screen.dart/weight_field_cubit/weight_field_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/weight_tracker_bloc/weight_tracker_bloc.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/weight_tracker_dropdown_cubit/weight_tracker_dropdown_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/components/show_total_nutrition_component.dart';
 import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
@@ -33,8 +38,15 @@ class MyApp extends StatelessWidget {
           BlocProvider<LunchCubit>(create: (context) => LunchCubit()),
           BlocProvider<DinnerCubit>(create: (context) => DinnerCubit()),
           BlocProvider<DateCubit>(create: (context) => DateCubit()),
+          BlocProvider<WeightDateCubit>(create: (context) => WeightDateCubit()),
+          BlocProvider<WeightTrackerDropdownCubit>(
+              create: (context) => WeightTrackerDropdownCubit()),
+          BlocProvider<WeightFieldCubit>(
+              create: (context) => WeightFieldCubit()),
           BlocProvider<RecipeAnalyzerBloc>(
               create: (context) => RecipeAnalyzerBloc()),
+          BlocProvider<WeightTrackerBloc>(
+              create: (context) => WeightTrackerBloc()),
         ],
         child: MaterialApp(
           title: "Gym Life's App",
@@ -51,6 +63,7 @@ class MyApp extends StatelessWidget {
                 const ShowTotalNutritionComponent(),
             Routes.recipeAnalyzerScreen: (context) =>
                 const RecipeAnalyzerScreen(),
+            Routes.addWeightScreen: (context) => const AddWeightScreen(),
           },
         ));
   }
