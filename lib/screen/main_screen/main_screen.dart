@@ -4,6 +4,7 @@ import 'package:gym_lifes_app/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:gym_lifes_app/screen/main_screen/component/bottom_nav_bar_component.dart';
 import 'package:gym_lifes_app/screen/food_screen/food_screen.dart';
 import 'package:gym_lifes_app/screen/main_screen/mains_bloc/mains_bloc.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/training_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -25,7 +26,7 @@ class MainScreen extends StatelessWidget {
           } else if (state is FoodScreenState) {
             return const FoodScreen();
           } else {
-            return const SizedBox();
+            return const TrainingScreen();
           }
         }),
       ),

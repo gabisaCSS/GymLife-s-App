@@ -149,7 +149,7 @@ class MyLineChart extends StatelessWidget {
                         FlSpot(index.toDouble(), point.weight))
                     .toList(),
                 isCurved: false,
-              )
+              ),
             ],
             gridData: const FlGridData(show: false),
             titlesData: FlTitlesData(

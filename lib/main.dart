@@ -17,6 +17,16 @@ import 'package:gym_lifes_app/screen/recipe_analyzer_screen/bloc/recipe_analyzer
 import 'package:gym_lifes_app/screen/recipe_analyzer_screen/cubit/recipe_ingr_cubit/recipe_ingr_cubit.dart';
 import 'package:gym_lifes_app/screen/recipe_analyzer_screen/cubit/recipe_title_cubit/recipe_title_cubit.dart';
 import 'package:gym_lifes_app/screen/recipe_analyzer_screen/recipe_analyzer_screen.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/add_training_component.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/exercise_name_field_component/cubit/exercise_name_field_cubit.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/rep_field_component/cubit/rep_field_cubit.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/set_field_component/cubit/set_field_cubit.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/training_weight_field_component/cubit/training_weight_field_cubit.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/edit_training_component.dart/edit_training_component.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/training_chart_component.dart/cubit/training_chart_cubit.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/training_chart_component.dart/training_chart_component.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/training_date_picker_bar_component/cubit/training_date_cubit.dart';
+import 'package:gym_lifes_app/screen/training_screen.dart/components/training_list_component/cubit/training_list_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,23 +40,63 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider<MainsBloc>(create: (context) => MainsBloc()),
+          BlocProvider<MainsBloc>(
+            create: (context) => MainsBloc(),
+          ),
           BlocProvider<RecipeTitleCubit>(
-              create: (context) => RecipeTitleCubit()),
-          BlocProvider<RecipeIngrCubit>(create: (context) => RecipeIngrCubit()),
-          BlocProvider<BreakfastCubit>(create: (context) => BreakfastCubit()),
-          BlocProvider<LunchCubit>(create: (context) => LunchCubit()),
-          BlocProvider<DinnerCubit>(create: (context) => DinnerCubit()),
-          BlocProvider<DateCubit>(create: (context) => DateCubit()),
-          BlocProvider<WeightDateCubit>(create: (context) => WeightDateCubit()),
+            create: (context) => RecipeTitleCubit(),
+          ),
+          BlocProvider<RecipeIngrCubit>(
+            create: (context) => RecipeIngrCubit(),
+          ),
+          BlocProvider<BreakfastCubit>(
+            create: (context) => BreakfastCubit(),
+          ),
+          BlocProvider<LunchCubit>(
+            create: (context) => LunchCubit(),
+          ),
+          BlocProvider<DinnerCubit>(
+            create: (context) => DinnerCubit(),
+          ),
+          BlocProvider<DateCubit>(
+            create: (context) => DateCubit(),
+          ),
+          BlocProvider<ExerciseNameFieldCubit>(
+            create: (context) => ExerciseNameFieldCubit(),
+          ),
+          BlocProvider<SetFieldCubit>(
+            create: (context) => SetFieldCubit(),
+          ),
+          BlocProvider<RepFieldCubit>(
+            create: (context) => RepFieldCubit(),
+          ),
+          BlocProvider<TrainingWeightFieldCubit>(
+            create: (context) => TrainingWeightFieldCubit(),
+          ),
+          BlocProvider<TrainingDateCubit>(
+            create: (context) => TrainingDateCubit(),
+          ),
+          BlocProvider<TrainingListCubit>(
+            create: (context) => TrainingListCubit(),
+          ),
+          BlocProvider<TrainingChartCubit>(
+            create: (context) => TrainingChartCubit(),
+          ),
+          BlocProvider<WeightDateCubit>(
+            create: (context) => WeightDateCubit(),
+          ),
           BlocProvider<WeightTrackerDropdownCubit>(
-              create: (context) => WeightTrackerDropdownCubit()),
+            create: (context) => WeightTrackerDropdownCubit(),
+          ),
           BlocProvider<WeightFieldCubit>(
-              create: (context) => WeightFieldCubit()),
+            create: (context) => WeightFieldCubit(),
+          ),
           BlocProvider<RecipeAnalyzerBloc>(
-              create: (context) => RecipeAnalyzerBloc()),
+            create: (context) => RecipeAnalyzerBloc(),
+          ),
           BlocProvider<WeightTrackerBloc>(
-              create: (context) => WeightTrackerBloc()),
+            create: (context) => WeightTrackerBloc(),
+          ),
         ],
         child: MaterialApp(
           title: "Gym Life's App",
@@ -59,11 +109,16 @@ class MyApp extends StatelessWidget {
           initialRoute: Routes.mainScreen,
           routes: {
             Routes.mainScreen: (context) => const MainScreen(),
+            Routes.addExerciseScreen: (context) => const AddTrainingComponent(),
             Routes.totalNutritionScreen: (context) =>
                 const ShowTotalNutritionComponent(),
             Routes.recipeAnalyzerScreen: (context) =>
                 const RecipeAnalyzerScreen(),
             Routes.addWeightScreen: (context) => const AddWeightScreen(),
+            Routes.editExerciseScreen: (context) =>
+                const EditTrainingComponent(),
+            Routes.trainingChartScreen: (context) =>
+                const TrainingChartComponent(),
           },
         ));
   }

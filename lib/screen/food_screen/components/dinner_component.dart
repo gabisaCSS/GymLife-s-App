@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/routes/routes.dart';
+import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
 
 class DinnerComponent extends StatefulWidget {
@@ -13,7 +14,8 @@ class DinnerComponent extends StatefulWidget {
 class _DinnerComponentState extends State<DinnerComponent> {
   @override
   void initState() {
-    context.read<DinnerCubit>().getDinner(date: DateTime.now());
+    final dateState = context.read<DateCubit>().state;
+    context.read<DinnerCubit>().getDinner(date: dateState.currentDate);
     super.initState();
   }
 

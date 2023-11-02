@@ -25,8 +25,8 @@ class RecipeAnalyzerScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () {
             Navigator.pop(context);
-            // context.read<RecipeTitleCubit>().clear();
-            // context.read<RecipeIngrCubit>().clear();
+            context.read<RecipeTitleCubit>().clear();
+            context.read<RecipeIngrCubit>().clear();
             // context.read<RecipeAnalyzerBloc>().add(ClearEvent());
           },
         ),

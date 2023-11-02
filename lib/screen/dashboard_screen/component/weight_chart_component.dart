@@ -6,6 +6,7 @@ import 'package:gym_lifes_app/screen/add_weight_screen.dart/weight_field_cubit/w
 import 'package:gym_lifes_app/screen/dashboard_screen/component/my_line_chart.dart';
 import 'package:gym_lifes_app/screen/dashboard_screen/component/weight_chart_dropdown_component.dart';
 import 'package:gym_lifes_app/screen/dashboard_screen/weight_tracker_bloc/weight_tracker_bloc.dart';
+import 'package:gym_lifes_app/style/box_decoration_style.dart';
 
 class WeightChart extends StatelessWidget {
   const WeightChart({super.key});
@@ -13,13 +14,19 @@ class WeightChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      height: 300,
+      width: double.infinity,
+      decoration: BoxDecorationStyle.basicBox,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.only(
+              top: 16.0,
+              left: 16,
+              right: 16,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
