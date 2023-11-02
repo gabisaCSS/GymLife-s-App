@@ -18,6 +18,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
       ];
       return BottomNavigationBar(
         backgroundColor: Colors.green.shade400,
+        selectedItemColor: Colors.white,
         currentIndex: currentIndex,
         items: items,
         onTap: (int index) {

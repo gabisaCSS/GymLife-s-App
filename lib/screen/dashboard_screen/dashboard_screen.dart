@@ -16,7 +16,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     final dropdownState = context.read<WeightTrackerDropdownCubit>().state;
     if (dropdownState is WeightTrackerDropdownValueState) {
-      print(dropdownState.value);
       WeightChartDropdownComponent.getWeightBasedTimeline(
           context, dropdownState.value);
     }
@@ -25,6 +24,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const WeightChart();
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          WeightChart(),
+        ],
+      ),
+    );
   }
 }

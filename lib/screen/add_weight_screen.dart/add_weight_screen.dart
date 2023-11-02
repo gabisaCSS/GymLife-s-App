@@ -62,7 +62,11 @@ class AddWeightScreen extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(16),
         child: Column(
-          children: [WeightFieldComponent(), Divider(), WeightDateComponent()],
+          children: [
+            WeightFieldComponent(),
+            Divider(),
+            WeightDateComponent(),
+          ],
         ),
       ),
     );

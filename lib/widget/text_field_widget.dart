@@ -9,6 +9,7 @@ class TextFieldWidget extends StatelessWidget {
   final InputBorder? inputBorder;
   final bool filled;
   final bool enableInteractiveSelection;
+  final FloatingLabelBehavior? floatingLabelBehavior;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
 
@@ -20,6 +21,7 @@ class TextFieldWidget extends StatelessWidget {
       this.onChanged,
       this.controller,
       this.maxLines,
+      this.floatingLabelBehavior = FloatingLabelBehavior.always,
       this.keyboardType,
       this.filled = true,
       this.enableInteractiveSelection = true,
@@ -29,7 +31,7 @@ class TextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-          floatingLabelBehavior: FloatingLabelBehavior.always,
+          floatingLabelBehavior: floatingLabelBehavior,
           label: Text(label ?? ''),
           hintText: hintText,
           filled: filled,

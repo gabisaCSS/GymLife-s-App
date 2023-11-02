@@ -1,5 +1,6 @@
 import 'package:gym_lifes_app/model/food_model/food_model.dart';
 import 'package:gym_lifes_app/model/nutrition_model/nutrition_model.dart';
+import 'package:gym_lifes_app/model/training_model/training_model.dart';
 import 'package:gym_lifes_app/model/weight_model/weight_model.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
@@ -37,6 +38,15 @@ class DatabaseHelper {
   static const String _weightColumn = 'weight';
   static const String _weightDateColumn = 'date';
 
+  static const String _trainingTable = 'tb_training';
+  static const String _trainingIdColumn = 'id';
+  static const String _exerciseNameColumn = 'exercise_name';
+  static const String _trainingSetsColumn = 'sets';
+  static const String _trainingRepsColumn = 'reps';
+  static const String _trainingDateIntColumn = 'dateInt';
+  static const String _trainingDateStringColumn = 'dateString';
+  static const String _trainingWeightColumn = 'weight';
+
   Future<Database> _initializeDb() async {
     var db = openDatabase(join(await getDatabasesPath(), 'gym_db.db'),
         onCreate: (db, version) async {
@@ -65,8 +75,104 @@ class DatabaseHelper {
           $_weightDateColumn INT
         )
         ''');
+
+      await db.execute('''
+          CREATE TABLE $_trainingTable(
+          $_trainingIdColumn INTEGER PRIMARY KEY AUTOINCREMENT,
+          $_exerciseNameColumn TEXT,
+          $_trainingSetsColumn INT,
+          $_trainingRepsColumn INT,
+          $_trainingWeightColumn REAL,
+          $_trainingDateIntColumn INT,
+          $_trainingDateStringColumn TEXT
+        )
+        ''');
     }, version: 1);
     return db;
+  }
+
+  Future<void> insertTraining(TrainingModel trainingModel) async {
+    final Database db = await database;
+    final DateFormat formatter = DateFormat('yMd');
+    final String dateString = formatter.format(trainingModel.date);
+    await db.insert(_trainingTable, {
+      ...trainingModel.toMap(),
+      _trainingDateStringColumn: dateString,
+    });
+  }
+
+  Future<void> editTraining(TrainingModel trainingModel) async {
+    final Database db = await database;
+    await db.update(
+      _trainingTable,
+      trainingModel.toMap(),
+      where: '$_trainingIdColumn = ?',
+      whereArgs: [trainingModel.id],
+    );
+  }
+
+  Future<void> deleteTraining({required int trainingId}) async {
+    final Database db = await database;
+
+    await db.delete(
+      _trainingTable,
+      where: '$_trainingIdColumn = ?',
+      whereArgs: [trainingId],
+    );
+  }
+
+  Future<List<TrainingModel>> getTrainingDaily({required DateTime date}) async {
+    final Database db = await database;
+
+    final DateFormat formatter = DateFormat('yMd');
+    final String dateString = formatter.format(date);
+
+    final List<Map<String, dynamic>> result = await db.query(
+      _trainingTable,
+      where: '$_trainingDateStringColumn = ?',
+      whereArgs: [dateString],
+    );
+
+    final List<TrainingModel> trainingModelList = result.map((e) {
+      return TrainingModel.fromMap(e);
+    }).toList();
+
+    return trainingModelList;
+  }
+
+  Future<List<TrainingModel>> getTrainingByExerciseName(
+      {required String exerciseName, DateTime? sinceDate}) async {
+    final Database db = await database;
+
+    String exerciseNameLower = exerciseName.toLowerCase();
+
+    if (sinceDate == null) {
+      final List<Map<String, dynamic>> result = await db.query(
+        _trainingTable,
+        where: '$_exerciseNameColumn = ?',
+        whereArgs: [exerciseNameLower],
+        orderBy: _trainingDateIntColumn,
+      );
+
+      final List<TrainingModel> trainingModelList = result.map((e) {
+        // print(e['date']);
+        return TrainingModel.fromMap(e);
+      }).toList();
+      return trainingModelList;
+    } else {
+      int dateInt = sinceDate.millisecondsSinceEpoch;
+      final List<Map<String, dynamic>> result = await db.query(
+        _trainingTable,
+        where: "$_trainingDateIntColumn >= ? and $_exerciseNameColumn = ",
+        whereArgs: [dateInt, exerciseNameLower],
+        orderBy: _trainingDateIntColumn,
+      );
+
+      final List<TrainingModel> trainingModelList =
+          result.map((e) => TrainingModel.fromMap(e)).toList();
+
+      return trainingModelList;
+    }
   }
 
   Future<void> insertWeight(WeightModel weightModel) async {
