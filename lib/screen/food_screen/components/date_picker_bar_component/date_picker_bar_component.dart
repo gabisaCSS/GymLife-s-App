@@ -31,6 +31,7 @@ class DatePickerBarComponent extends StatelessWidget {
           } else if (isYesterday) {
             dateText = 'Yesterday';
           }
+
           return DatePickerBarWidget(
             dateText: dateText,
             initialDate: currentDate,

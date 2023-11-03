@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_lifes_app/screen/main_screen/mains_bloc/mains_bloc.dart';
+import 'package:gym_lifes_app/screen/main_screen/bloc/mains_bloc.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
   const BottomNavigationBarComponent({super.key});

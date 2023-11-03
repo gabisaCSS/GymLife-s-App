@@ -13,7 +13,7 @@ import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_scre
 import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/component/recipe_ingr_field_component/cubit/recipe_ingr_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/component/recipe_title_field_component/cubit/recipe_title_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/cubit/food_cubit.dart';
-import 'package:gym_lifes_app/screen/main_screen/mains_bloc/mains_bloc.dart';
+import 'package:gym_lifes_app/screen/main_screen/bloc/mains_bloc.dart';
 import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/exercise_name_field_component/cubit/exercise_name_field_cubit.dart';
 import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/rep_field_component/cubit/rep_field_cubit.dart';
 import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/set_field_component/cubit/set_field_cubit.dart';
