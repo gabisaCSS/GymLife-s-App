@@ -17,8 +17,10 @@ class BottomNavigationBarComponent extends StatelessWidget {
             icon: Icon(Icons.fitness_center), label: 'Training'),
       ];
       return BottomNavigationBar(
+        backgroundColor: const Color(0xff0066EE),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white.withOpacity(0.5),
         currentIndex: currentIndex,
-        selectedItemColor: Colors.amber,
         items: items,
         onTap: (int index) {
           context.read<MainsBloc>().add(ChangedBottomNavBarEvent(index: index));

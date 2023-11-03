@@ -8,11 +8,11 @@ NutritionModel nutritionModelFromJson(String str) =>
     NutritionModel.fromJson(json.decode(str));
 
 class NutritionModel {
-  int calories;
-  Map<String, TotalDaily> totalNutrients;
-  Map<String, TotalDaily> totalDaily;
+  int? calories;
+  Nutrients totalNutrients;
+  Map<String, NutrientsData> totalDaily;
   List<Ingredient> ingredients;
-  TotalNutrientsKCal totalNutrientsKCal;
+  NutrientsKCal totalNutrientsKCal;
 
   NutritionModel({
     required this.calories,
@@ -24,20 +24,49 @@ class NutritionModel {
 
   factory NutritionModel.fromJson(Map<String, dynamic> json) => NutritionModel(
         calories: json["calories"],
-        totalNutrients: Map.from(json["totalNutrients"]).map(
-            (k, v) => MapEntry<String, TotalDaily>(k, TotalDaily.fromJson(v))),
-        totalDaily: Map.from(json["totalDaily"]).map(
-            (k, v) => MapEntry<String, TotalDaily>(k, TotalDaily.fromJson(v))),
+        totalNutrients: Nutrients.fromJson(json["totalNutrients"]),
+        totalDaily: Map.from(json["totalDaily"]).map((k, v) =>
+            MapEntry<String, NutrientsData>(k, NutrientsData.fromJson(v))),
         ingredients: List<Ingredient>.from(
             json["ingredients"].map((x) => Ingredient.fromJson(x))),
-        totalNutrientsKCal:
-            TotalNutrientsKCal.fromJson(json["totalNutrientsKCal"]),
+        totalNutrientsKCal: NutrientsKCal.fromJson(json["totalNutrientsKCal"]),
+      );
+}
+
+class Nutrients {
+  NutrientsData enercKcal;
+  NutrientsData protein;
+  NutrientsData carb;
+  NutrientsData fat;
+  NutrientsData fiber;
+  NutrientsData sugar;
+
+  Nutrients({
+    required this.enercKcal,
+    required this.fat,
+    required this.protein,
+    required this.carb,
+    required this.fiber,
+    required this.sugar,
+  });
+
+  factory Nutrients.fromJson(Map<String, dynamic> json) => Nutrients(
+        enercKcal: NutrientsData.fromJson(json["ENERC_KCAL"]),
+        fat: NutrientsData.fromJson(json["FAT"]),
+        protein: NutrientsData.fromJson(json["PROCNT"]),
+        carb: NutrientsData.fromJson(json["CHOCDF"]),
+        fiber: json["FIBTG"] == null
+            ? NutrientsData(label: 'Fiber', quantity: 0, unit: 'gr')
+            : NutrientsData.fromJson(json["FIBTG"]),
+        sugar: json["SUGAR"] == null
+            ? NutrientsData(label: 'Sugar', quantity: 0, unit: 'gr')
+            : NutrientsData.fromJson(json["SUGAR"]),
       );
 }
 
 class Ingredient {
   String text;
-  List<Parsed> parsed;
+  List<Parsed>? parsed;
 
   Ingredient({
     required this.text,
@@ -46,8 +75,11 @@ class Ingredient {
 
   factory Ingredient.fromJson(Map<String, dynamic> json) => Ingredient(
         text: json["text"],
-        parsed:
-            List<Parsed>.from(json["parsed"].map((x) => Parsed.fromJson(x))),
+        // parsed:
+        // List<Parsed>.from(json["parsed"].map((x) => Parsed.fromJson(x))),
+        parsed: json["parsed"] == null
+            ? []
+            : List<Parsed>.from(json["parsed"].map((x) => Parsed.fromJson(x))),
       );
 }
 
@@ -59,9 +91,7 @@ class Parsed {
   String foodId;
   double weight;
   double retainedWeight;
-  Map<String, TotalDaily> nutrients;
-  String measureUri;
-  String status;
+  Nutrients nutrients;
 
   Parsed({
     required this.quantity,
@@ -72,8 +102,6 @@ class Parsed {
     required this.weight,
     required this.retainedWeight,
     required this.nutrients,
-    required this.measureUri,
-    required this.status,
   });
 
   factory Parsed.fromJson(Map<String, dynamic> json) => Parsed(
@@ -84,49 +112,53 @@ class Parsed {
         foodId: json["foodId"],
         weight: json["weight"],
         retainedWeight: json["retainedWeight"],
-        nutrients: Map.from(json["nutrients"]).map(
-            (k, v) => MapEntry<String, TotalDaily>(k, TotalDaily.fromJson(v))),
-        measureUri: json["measureURI"],
-        status: json["status"],
+        nutrients: Nutrients.fromJson(json['nutrients']),
       );
 }
 
-class TotalDaily {
+class NutrientsData {
   String label;
   double quantity;
   String unit;
 
-  TotalDaily({
+  NutrientsData({
     required this.label,
     required this.quantity,
     required this.unit,
   });
 
-  factory TotalDaily.fromJson(Map<String, dynamic> json) => TotalDaily(
+  factory NutrientsData.fromJson(Map<String, dynamic> json) => NutrientsData(
         label: json["label"],
         quantity: json["quantity"]?.toDouble(),
         unit: json["unit"],
       );
+
+  Map<String, dynamic> toMap() {
+    return {
+      "label": label,
+      "quantity": quantity,
+      "unit": unit,
+    };
+  }
 }
 
-class TotalNutrientsKCal {
-  TotalDaily enercKcal;
-  TotalDaily procntKcal;
-  TotalDaily fatKcal;
-  TotalDaily chocdfKcal;
+class NutrientsKCal {
+  NutrientsData enercKcal;
+  NutrientsData procntKcal;
+  NutrientsData fatKcal;
+  NutrientsData chocdfKcal;
 
-  TotalNutrientsKCal({
+  NutrientsKCal({
     required this.enercKcal,
     required this.procntKcal,
     required this.fatKcal,
     required this.chocdfKcal,
   });
 
-  factory TotalNutrientsKCal.fromJson(Map<String, dynamic> json) =>
-      TotalNutrientsKCal(
-        enercKcal: TotalDaily.fromJson(json["ENERC_KCAL"]),
-        procntKcal: TotalDaily.fromJson(json["PROCNT_KCAL"]),
-        fatKcal: TotalDaily.fromJson(json["FAT_KCAL"]),
-        chocdfKcal: TotalDaily.fromJson(json["CHOCDF_KCAL"]),
+  factory NutrientsKCal.fromJson(Map<String, dynamic> json) => NutrientsKCal(
+        enercKcal: NutrientsData.fromJson(json["ENERC_KCAL"]),
+        procntKcal: NutrientsData.fromJson(json["PROCNT_KCAL"]),
+        fatKcal: NutrientsData.fromJson(json["FAT_KCAL"]),
+        chocdfKcal: NutrientsData.fromJson(json["CHOCDF_KCAL"]),
       );
 }
