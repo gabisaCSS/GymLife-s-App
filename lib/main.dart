@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/routes/routes.dart';
-import 'package:gym_lifes_app/screen/add_weight_screen.dart/add_weight_screen.dart';
-import 'package:gym_lifes_app/screen/add_weight_screen.dart/weight_date_cubit/weight_date_cubit.dart';
-import 'package:gym_lifes_app/screen/add_weight_screen.dart/weight_field_cubit/weight_field_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/add_weight_screen_component/add_weight_screen_component.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/add_weight_screen_component/components/weight_date_component/cubit/weight_date_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/add_weight_screen_component/components/weight_field_component/cubit/weight_field_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/slider_component/component/calorie_progress_counter_component/cubit/calorie_progress_counter_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/slider_component/component/dot_indicator_component/cubit/dot_indicator_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/weight_chart_component/component/weight_chart_dropdown_component/cubit/weight_tracker_dropdown_cubit.dart';
 import 'package:gym_lifes_app/screen/dashboard_screen/weight_tracker_bloc/weight_tracker_bloc.dart';
-import 'package:gym_lifes_app/screen/dashboard_screen/weight_tracker_dropdown_cubit/weight_tracker_dropdown_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/components/show_total_nutrition_component.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/food_nutrition_chart_component.dart';
+import 'package:gym_lifes_app/screen/food_screen/cubit/food_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
@@ -49,6 +52,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<RecipeIngrCubit>(
             create: (context) => RecipeIngrCubit(),
           ),
+          BlocProvider<FoodCubit>(
+            create: (context) => FoodCubit(),
+          ),
           BlocProvider<BreakfastCubit>(
             create: (context) => BreakfastCubit(),
           ),
@@ -61,6 +67,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<DateCubit>(
             create: (context) => DateCubit(),
           ),
+          BlocProvider<DotIndicatorCubit>(
+            create: (context) => DotIndicatorCubit(),
+          ),
           BlocProvider<ExerciseNameFieldCubit>(
             create: (context) => ExerciseNameFieldCubit(),
           ),
@@ -72,6 +81,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<TrainingWeightFieldCubit>(
             create: (context) => TrainingWeightFieldCubit(),
+          ),
+          BlocProvider<CalorieProgressCounterCubit>(
+            create: (context) => CalorieProgressCounterCubit(),
           ),
           BlocProvider<TrainingDateCubit>(
             create: (context) => TrainingDateCubit(),
@@ -111,10 +123,11 @@ class MyApp extends StatelessWidget {
             Routes.mainScreen: (context) => const MainScreen(),
             Routes.addExerciseScreen: (context) => const AddTrainingComponent(),
             Routes.totalNutritionScreen: (context) =>
-                const ShowTotalNutritionComponent(),
+                const FoodNutritionChartComponent(),
             Routes.recipeAnalyzerScreen: (context) =>
                 const RecipeAnalyzerScreen(),
-            Routes.addWeightScreen: (context) => const AddWeightScreen(),
+            Routes.addWeightScreen: (context) =>
+                const AddWeightScreenComponent(),
             Routes.editExerciseScreen: (context) =>
                 const EditTrainingComponent(),
             Routes.trainingChartScreen: (context) =>

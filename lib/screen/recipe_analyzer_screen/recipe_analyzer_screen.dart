@@ -42,7 +42,7 @@ class RecipeAnalyzerScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Recipe Analysis',
+                  'Recipe Analyzer',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
               ],
@@ -87,7 +87,12 @@ class RecipeAnalyzerScreen extends StatelessWidget {
             BlocBuilder<RecipeAnalyzerBloc, RecipeAnalyzerState>(
               builder: (context, state) {
                 if (state is RecipeAnalyzerLoadingState) {
-                  return const CircularProgressIndicator();
+                  return const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                    ],
+                  );
                 } else if (state is RecipeAnalyzerLoadedState) {
                   final NutritionModel data = state.nutritionModel;
                   final nutrisi = data.totalNutrients;

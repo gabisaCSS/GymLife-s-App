@@ -223,15 +223,36 @@ class DatabaseHelper {
     }
   }
 
+  Future<void> deleteFoodById({required int foodId}) async {
+    final Database db = await database;
+
+    await db.delete(
+      _foodTable,
+      where: '$_foodIdColumn = ?',
+      whereArgs: [foodId],
+    );
+  }
+
   Future<List<FoodModel>> getFoods(
       {required DateTime date, required String eatTime}) async {
     final Database db = await database;
+    List<Map<String, dynamic>> foodMapList;
 
-    // Lakukan kueri SQL untuk mengambil data makanan dan nutrisi yang sesuai
-    final List<Map<String, dynamic>> foodMapList = await db.query(_foodTable,
-        // );
+    if (eatTime.isEmpty) {
+      foodMapList = await db.query(
+        _foodTable,
+        where: '$_dateColumn = ?',
+        whereArgs: [DateFormat('yyyy-MM-dd').format(date)],
+      );
+    } else {
+      // Lakukan kueri SQL untuk mengambil data makanan dan nutrisi yang sesuai
+      foodMapList = await db.query(
+        _foodTable,
         where: '$_dateColumn = ? and $_eatTimeColumn = ?',
-        whereArgs: [DateFormat('yyyy-MM-dd').format(date), eatTime]);
+        whereArgs: [DateFormat('yyyy-MM-dd').format(date), eatTime],
+      );
+    }
+
     final List<Map<String, dynamic>> nutritionMapList = await db.query(
       _nutritionTable,
     );

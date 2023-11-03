@@ -4,6 +4,7 @@ import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit
 import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
+import 'package:gym_lifes_app/widget/date_picker_bar_widget.dart';
 import 'package:intl/intl.dart';
 
 class DatePickerBarComponent extends StatelessWidget {
@@ -11,12 +12,8 @@ class DatePickerBarComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          border: Border(bottom: BorderSide(width: 1, color: Colors.grey))),
-      child: BlocBuilder<DateCubit, DateState>(builder: (context, state) {
+    return BlocBuilder<DateCubit, DateState>(
+      builder: (context, state) {
         if (state is DateValueState) {
           final DateTime currentDate = state.currentDate;
           final DateFormat formatter = DateFormat('EEEE, d MMM');
@@ -34,64 +31,45 @@ class DatePickerBarComponent extends StatelessWidget {
           } else if (isYesterday) {
             dateText = 'Yesterday';
           }
-
-          return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.keyboard_arrow_left_outlined),
-                  onPressed: () {
-                    context.read<DateCubit>().decrementDate();
-                    context.read<BreakfastCubit>().getBreakfast(
-                        date: currentDate.add(const Duration(days: -1)));
-                    context.read<LunchCubit>().getLunch(
-                        date: currentDate.add(const Duration(days: -1)));
-                    context.read<DinnerCubit>().getDinner(
-                        date: currentDate.add(const Duration(days: -1)));
-                  },
-                ),
-                TextButton(
-                  onPressed: () {
-                    showDatePicker(
-                            context: context,
-                            initialDate: currentDate,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2025))
-                        .then((value) {
-                      if (value != null) {
-                        context
-                            .read<DateCubit>()
-                            .selectDate(selectedDate: value);
-                        context
-                            .read<BreakfastCubit>()
-                            .getBreakfast(date: value);
-                        context.read<LunchCubit>().getLunch(date: value);
-                        context.read<DinnerCubit>().getDinner(date: value);
-                      }
-                    });
-                  },
-                  child: Text(
-                    dateText,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.keyboard_arrow_right_outlined),
-                  onPressed: () {
-                    context.read<DateCubit>().incrementDate();
-                    context.read<BreakfastCubit>().getBreakfast(
-                        date: currentDate.add(const Duration(days: 1)));
-                    context.read<LunchCubit>().getLunch(
-                        date: currentDate.add(const Duration(days: 1)));
-                    context.read<DinnerCubit>().getDinner(
-                        date: currentDate.add(const Duration(days: 1)));
-                  },
-                ),
-              ]);
+          return DatePickerBarWidget(
+            dateText: dateText,
+            initialDate: currentDate,
+            onPressedLeftArrow: () {
+              context.read<DateCubit>().decrementDate();
+              context.read<BreakfastCubit>().getBreakfast(
+                  date: currentDate.add(const Duration(days: -1)));
+              context
+                  .read<LunchCubit>()
+                  .getLunch(date: currentDate.add(const Duration(days: -1)));
+              context
+                  .read<DinnerCubit>()
+                  .getDinner(date: currentDate.add(const Duration(days: -1)));
+            },
+            onPressedRightArrow: () {
+              context.read<DateCubit>().incrementDate();
+              context
+                  .read<BreakfastCubit>()
+                  .getBreakfast(date: currentDate.add(const Duration(days: 1)));
+              context
+                  .read<LunchCubit>()
+                  .getLunch(date: currentDate.add(const Duration(days: 1)));
+              context
+                  .read<DinnerCubit>()
+                  .getDinner(date: currentDate.add(const Duration(days: 1)));
+            },
+            onChangedDate: (DateTime? value) {
+              if (value != null) {
+                context.read<DateCubit>().selectDate(selectedDate: value);
+                context.read<BreakfastCubit>().getBreakfast(date: value);
+                context.read<LunchCubit>().getLunch(date: value);
+                context.read<DinnerCubit>().getDinner(date: value);
+              }
+            },
+          );
         } else {
           return const SizedBox();
         }
-      }),
+      },
     );
   }
 }

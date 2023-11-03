@@ -8,6 +8,8 @@ import 'package:gym_lifes_app/screen/training_screen.dart/components/add_trainin
 import 'package:gym_lifes_app/screen/training_screen.dart/components/add_training_component.dart/components/training_weight_field_component/cubit/training_weight_field_cubit.dart';
 import 'package:gym_lifes_app/screen/training_screen.dart/components/training_chart_component.dart/cubit/training_chart_cubit.dart';
 import 'package:gym_lifes_app/screen/training_screen.dart/components/training_list_component/cubit/training_list_cubit.dart';
+import 'package:gym_lifes_app/style/color_widget.dart';
+import 'package:gym_lifes_app/style/text_style_widget.dart';
 
 class ListComponent extends StatelessWidget {
   final String title;
@@ -36,7 +38,7 @@ class ListComponent extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
             child: Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              style: TextStyleWidget.m3BodyPas(isBold: true),
             ),
           ),
           const Divider(),
@@ -125,7 +127,13 @@ class ListComponent extends StatelessWidget {
           (trainingList.isNotEmpty) ? const Divider() : const SizedBox(),
           TextButton(
               onPressed: onPressedTextButton,
-              child: const Text('Add Exercise')),
+              child: Text(
+                'Add Exercise',
+                style: TextStyleWidget.m3BodyLarge(
+                  color: ColorWidget.primaryColor,
+                  // isBold: true,
+                ),
+              )),
         ],
       ),
     );

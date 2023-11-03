@@ -12,6 +12,8 @@ class RecipeTitleFieldComponent extends StatelessWidget {
       builder: (context, state) {
         if (state is RecipeTitleErrorState) {
           return TextFieldWidget(
+            inputBorder: const OutlineInputBorder(),
+            filled: false,
             label: 'Title',
             hintText: 'Insert Your Recipe Title Here',
             errorText: state.errorMessage,
@@ -22,6 +24,8 @@ class RecipeTitleFieldComponent extends StatelessWidget {
           );
         } else if (state is RecipeTitleAmanState) {
           return TextFieldWidget(
+            inputBorder: const OutlineInputBorder(),
+            filled: false,
             label: 'Title',
             hintText: 'Insert Your Recipe Title Here',
             keyboardType: TextInputType.text,
@@ -31,6 +35,8 @@ class RecipeTitleFieldComponent extends StatelessWidget {
           );
         } else if (state is RecipeTitleClearState) {
           return TextFieldWidget(
+            inputBorder: const OutlineInputBorder(),
+            filled: false,
             label: 'Title',
             hintText: 'Insert Your Recipe Title Here',
             keyboardType: TextInputType.text,

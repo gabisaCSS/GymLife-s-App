@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gym_lifes_app/style/text_style_widget.dart';
 
 class DatePickerBarWidget extends StatelessWidget {
   final void Function()? onPressedLeftArrow;
@@ -40,7 +41,7 @@ class DatePickerBarWidget extends StatelessWidget {
             },
             child: Text(
               dateText,
-              style: const TextStyle(fontSize: 16),
+              style: TextStyleWidget.m3BodyLarge(),
             ),
           ),
           IconButton(

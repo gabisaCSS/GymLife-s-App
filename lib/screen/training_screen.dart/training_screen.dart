@@ -10,7 +10,7 @@ class TrainingScreen extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(
-          height: 30,
+          height: 2,
         ),
         const TrainingDatePickerBarComponent(),
         Expanded(

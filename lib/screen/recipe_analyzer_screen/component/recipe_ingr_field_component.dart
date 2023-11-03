@@ -12,6 +12,8 @@ class RecipeIngrFieldComponent extends StatelessWidget {
       builder: (context, state) {
         if (state is RecipeIngrErrorState) {
           return TextFieldWidget(
+            inputBorder: const OutlineInputBorder(),
+            filled: false,
             label: 'Ingredients',
             hintText: 'Ex: \n1 cup of rice\n1 tablespoon of sweet soy sauce',
             maxLines: 5,
@@ -22,6 +24,8 @@ class RecipeIngrFieldComponent extends StatelessWidget {
           );
         } else if (state is RecipeIngrAmanState) {
           return TextFieldWidget(
+            inputBorder: const OutlineInputBorder(),
+            filled: false,
             label: 'Ingredients',
             hintText: 'Ex: \n1 cup of rice\n1 tablespoon of sweet soy sauce',
             maxLines: 5,
@@ -31,6 +35,8 @@ class RecipeIngrFieldComponent extends StatelessWidget {
           );
         } else if (state is RecipeIngrClearState) {
           return TextFieldWidget(
+            inputBorder: const OutlineInputBorder(),
+            filled: false,
             label: 'Ingredients',
             hintText: 'Ex: \n1 cup of rice\n1 tablespoon of sweet soy sauce',
             maxLines: 5,

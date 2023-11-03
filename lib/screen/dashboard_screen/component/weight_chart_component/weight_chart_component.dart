@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/routes/routes.dart';
-import 'package:gym_lifes_app/screen/add_weight_screen.dart/weight_date_cubit/weight_date_cubit.dart';
-import 'package:gym_lifes_app/screen/add_weight_screen.dart/weight_field_cubit/weight_field_cubit.dart';
-import 'package:gym_lifes_app/screen/dashboard_screen/component/my_line_chart.dart';
-import 'package:gym_lifes_app/screen/dashboard_screen/component/weight_chart_dropdown_component.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/add_weight_screen_component/components/weight_date_component/cubit/weight_date_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/add_weight_screen_component/components/weight_field_component/cubit/weight_field_cubit.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/weight_chart_component/component/weight_chart_dropdown_component/weight_chart_dropdown_component.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/weight_chart_component/component/weight_line_chart_component/weight_line_chart_component.dart';
 import 'package:gym_lifes_app/screen/dashboard_screen/weight_tracker_bloc/weight_tracker_bloc.dart';
 import 'package:gym_lifes_app/style/box_decoration_style.dart';
+import 'package:gym_lifes_app/style/text_style_widget.dart';
 
-class WeightChart extends StatelessWidget {
-  const WeightChart({super.key});
+class WeightChartComponent extends StatelessWidget {
+  const WeightChartComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,6 @@ class WeightChart extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecorationStyle.basicBox,
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -30,14 +29,14 @@ class WeightChart extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Weight Data',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      'Body Weight',
+                      style: TextStyleWidget.m3Header2(),
                     ),
-                    WeightChartDropdownComponent()
+                    const WeightChartDropdownComponent()
                   ],
                 ),
                 IconButton(
@@ -59,7 +58,10 @@ class WeightChart extends StatelessWidget {
           BlocBuilder<WeightTrackerBloc, WeightTrackerState>(
               builder: (context, state) {
             if (state is WeightTrackerLoadedState) {
-              return MyLineChart(points: state.points);
+              return Padding(
+                padding: const EdgeInsets.only(right: 37),
+                child: WeightLineChartComponent(weightList: state.points),
+              );
             } else if (state is WeightTrackerLoadingState) {
               return const AspectRatio(
                 aspectRatio: 2,

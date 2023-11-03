@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_lifes_app/style/text_style_widget.dart';
 
 class DropdownButtonWidget extends StatelessWidget {
   final String value;
@@ -26,11 +27,7 @@ class DropdownButtonWidget extends StatelessWidget {
           items: itemsList
               .map((String item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                          fontSize: 11, fontWeight: FontWeight.normal),
-                    ),
+                    child: Text(item, style: TextStyleWidget.m3LabelSmall()),
                   ))
               .toList(),
           onChanged: onChanged),

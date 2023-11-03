@@ -49,12 +49,11 @@ class BreakfastCubit extends Cubit<BreakfastValueState> {
     double totalFiber = 0;
     double totalFat = 0;
     double totalSugar = 0;
-    List<FoodModel> foods = [];
-
-    foods = List.from(state.breakfastList);
-    foods.add(food);
 
     await dbHelper.insertFood(food);
+
+    List<FoodModel> foods =
+        await dbHelper.getFoods(date: food.date, eatTime: food.eatTime);
 
     for (var food in foods) {
       totalCalorie += food.calori.quantity;

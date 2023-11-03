@@ -4,6 +4,7 @@ import 'package:gym_lifes_app/routes/routes.dart';
 import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
+import 'package:gym_lifes_app/style/text_style_widget.dart';
 
 class RemainingCaloriesCounterComponent extends StatelessWidget {
   const RemainingCaloriesCounterComponent({super.key});
@@ -36,11 +37,11 @@ class RemainingCaloriesCounterComponent extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 16.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
                 child: Text(
                   'Calories Left',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyleWidget.m3BodyPas(),
                 ),
               ),
               const SizedBox(
@@ -51,8 +52,14 @@ class RemainingCaloriesCounterComponent extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(target.toStringAsFixed(0)),
-                      const Text('Target'),
+                      Text(
+                        target.toStringAsFixed(0),
+                        style: TextStyleWidget.m3BodyLarge(),
+                      ),
+                      Text(
+                        'Target',
+                        style: TextStyleWidget.m3LabelLarge(),
+                      ),
                     ],
                   ),
                   const Text(
@@ -61,8 +68,14 @@ class RemainingCaloriesCounterComponent extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Text(totalCalorie.toStringAsFixed(0)),
-                      const Text('Food'),
+                      Text(
+                        totalCalorie.toStringAsFixed(0),
+                        style: TextStyleWidget.m3BodyLarge(),
+                      ),
+                      Text(
+                        'Food',
+                        style: TextStyleWidget.m3LabelLarge(),
+                      ),
                     ],
                   ),
                   const Text(
@@ -71,8 +84,12 @@ class RemainingCaloriesCounterComponent extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Text(sisa.toStringAsFixed(0)),
-                      const Text('Left'),
+                      Text(sisa.toStringAsFixed(0),
+                          style: TextStyleWidget.m3BodyLarge(isBold: true)),
+                      Text(
+                        'Left',
+                        style: TextStyleWidget.m3LabelLarge(),
+                      ),
                     ],
                   ),
                 ],

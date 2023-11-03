@@ -13,7 +13,7 @@ class FoodScreen extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(
-          height: 30,
+          height: 2,
         ),
         const DatePickerBarComponent(),
         const SizedBox(
@@ -24,13 +24,7 @@ class FoodScreen extends StatelessWidget {
           child: ListView(
             children: const [
               BreakfastComponent(),
-              SizedBox(
-                height: 16,
-              ),
               LunchComponent(),
-              SizedBox(
-                height: 16,
-              ),
               DinnerComponent()
             ],
           ),
