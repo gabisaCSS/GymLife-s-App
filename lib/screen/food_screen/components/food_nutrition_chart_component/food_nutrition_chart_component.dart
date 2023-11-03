@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/breakfast_component/cubit/breakfast_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/date_picker_bar_component/cubit/date_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/dinner_component/cubit/dinner_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/lunch_component/cubit/lunch_cubit.dart';
 import 'package:gym_lifes_app/style/text_style_widget.dart';
 import 'package:gym_lifes_app/widget/nutrition_pie_chart_widget.dart';
 import 'package:intl/intl.dart';
@@ -85,14 +85,18 @@ class FoodNutritionChartComponent extends StatelessWidget {
         }
 
         return Container(
+          color: Colors.white,
           width: double.infinity,
-          height: 600,
-          margin: const EdgeInsets.all(16),
+          // height: 600,
+          // margin: const EdgeInsets.all(16),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 15,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

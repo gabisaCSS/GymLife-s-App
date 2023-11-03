@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/model/food_model/food_model.dart';
 import 'package:gym_lifes_app/model/nutrition_model/nutrition_model.dart';
-import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
-import 'package:gym_lifes_app/screen/recipe_analyzer_screen/component/recipe_ingr_field_component.dart';
-import 'package:gym_lifes_app/screen/recipe_analyzer_screen/component/recipe_title_field_component.dart';
-import 'package:gym_lifes_app/screen/recipe_analyzer_screen/bloc/recipe_analyzer_bloc.dart';
-import 'package:gym_lifes_app/screen/recipe_analyzer_screen/cubit/recipe_ingr_cubit/recipe_ingr_cubit.dart';
-import 'package:gym_lifes_app/screen/recipe_analyzer_screen/cubit/recipe_title_cubit/recipe_title_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/breakfast_component/cubit/breakfast_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/date_picker_bar_component/cubit/date_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/dinner_component/cubit/dinner_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/lunch_component/cubit/lunch_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/bloc/recipe_analyzer_bloc.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/component/recipe_ingr_field_component/cubit/recipe_ingr_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/component/recipe_ingr_field_component/recipe_ingr_field_component.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/component/recipe_title_field_component/cubit/recipe_title_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/component/recipe_title_field_component/recipe_title_field_component.dart';
 
-class RecipeAnalyzerScreen extends StatelessWidget {
-  const RecipeAnalyzerScreen({super.key});
+class RecipeAnalyzerScreenComponent extends StatelessWidget {
+  const RecipeAnalyzerScreenComponent({super.key});
 
   @override
   Widget build(BuildContext context) {

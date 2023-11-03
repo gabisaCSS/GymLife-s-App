@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gym_lifes_app/screen/dashboard_screen/component/weight_chart_component/bloc/weight_tracker_bloc.dart';
 import 'package:gym_lifes_app/screen/dashboard_screen/component/weight_chart_component/component/weight_chart_dropdown_component/cubit/weight_tracker_dropdown_cubit.dart';
-import 'package:gym_lifes_app/screen/dashboard_screen/weight_tracker_bloc/weight_tracker_bloc.dart';
 import 'package:gym_lifes_app/widget/dropdown_button_widget.dart';
 import 'package:jiffy/jiffy.dart';
 

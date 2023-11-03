@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_lifes_app/model/food_model/food_model.dart';
 import 'package:gym_lifes_app/routes/routes.dart';
-import 'package:gym_lifes_app/screen/food_screen/breakfast_cubit/breakfast_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/breakfast_component/cubit/breakfast_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/dinner_component/cubit/dinner_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/lunch_component/cubit/lunch_cubit.dart';
 import 'package:gym_lifes_app/screen/food_screen/cubit/food_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/dinner_cubit/dinner_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
 import 'package:gym_lifes_app/style/color_widget.dart';
 import 'package:gym_lifes_app/style/text_style_widget.dart';
 

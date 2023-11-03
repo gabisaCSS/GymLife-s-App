@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_lifes_app/screen/food_screen/components/food_list_component.dart';
-import 'package:gym_lifes_app/screen/food_screen/date_cubit/date_cubit.dart';
-import 'package:gym_lifes_app/screen/food_screen/lunch_cubit/lunch_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/date_picker_bar_component/cubit/date_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/food_list_component/food_list_component.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/lunch_component/cubit/lunch_cubit.dart';
 
 class LunchComponent extends StatefulWidget {
   const LunchComponent({super.key});

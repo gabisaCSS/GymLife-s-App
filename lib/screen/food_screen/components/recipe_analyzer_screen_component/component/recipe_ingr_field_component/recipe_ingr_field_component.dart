@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_lifes_app/screen/recipe_analyzer_screen/cubit/recipe_ingr_cubit/recipe_ingr_cubit.dart';
+import 'package:gym_lifes_app/screen/food_screen/components/recipe_analyzer_screen_component/component/recipe_ingr_field_component/cubit/recipe_ingr_cubit.dart';
 import 'package:gym_lifes_app/widget/text_field_widget.dart';
 
 class RecipeIngrFieldComponent extends StatelessWidget {
